@@ -42,19 +42,18 @@ DFcommon = pandas.read_excel('annualBofA.xlsx', sheet_name = 'common')
 vix = DFcommon.values[:, 1].astype(float)
 trate = DFcommon.values[:, 2].astype(float)
 N = len(vix)
-allratings = ['AAA', 'AA', 'A', 'BBB', 'BB', 'B', 'CCC']
+allratings = ['Corporate', 'AAA', 'AA', 'A', 'BBB', 'BB', 'B', 'CCC']
 returns = numpy.diff(numpy.log(wealth), axis = 0)
 
-# Plot of rates for sever ratings
-for ratings in range(7):
+for ratings in range(8):
     plt.plot(rates[:, ratings], label = allratings[ratings])
 plt.legend()
 plt.xlabel('Year')
-plt.title('Corporate bond rates for various ratings')
+plt.title('Corporate bond rates')
 plt.show()
 
 # Plot of wealth process for seven ratings
-for ratings in range(7):
+for ratings in range(8):
     plt.plot(wealth[:, ratings]/wealth[0, ratings], label = allratings[ratings])
 plt.legend()
 plt.title('Wealth process for corporate rated bonds, 1996 = 1$')
@@ -76,7 +75,7 @@ analysis(vixres)
 plots(vixres, ' AR log VIX')
 
 # Analysis for each ratings
-for ratings in range(7):
+for ratings in range(8):
     print('Ratings ', allratings[ratings])
     
     # Relabeling the data, picking the series for this ratings
